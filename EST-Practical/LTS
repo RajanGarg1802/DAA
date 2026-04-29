@@ -1,0 +1,26 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+
+int LTS(vector<int>& nums){
+    int arrLen = nums.size();
+    int maxCount = 0;
+    for(int i = 0; i<arrLen; i++){
+        int count = 0;
+        int prev = nums[i];
+        for(int j = i + 1; j<arrLen; j++){
+            if(prev < nums[j]){
+                count++;
+                prev = nums[j];
+            }
+        }
+        maxCount = max(maxCount, count);
+    }
+    return maxCount + 1;
+}
+
+int main() {
+    vector<int> nums = {10, 9, 2, 5, 3, 7, 101, 18};
+    cout << LTS(nums) << endl;
+    return 0;
+}
