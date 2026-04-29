@@ -1,0 +1,70 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+public:
+    int val;
+    Node* next;
+    Node(int data){
+        val = data;
+        next = nullptr;
+    }
+};
+
+class Queue{
+private:
+    Node* head;
+    Node* tail;
+public:
+    Queue(){
+        head = tail = nullptr;
+    }
+
+    void push(int data){
+        Node* newNode = new Node(data);
+        if(head == nullptr){
+            head = tail = newNode;
+            return;
+        }
+        tail->next = newNode;
+        tail = newNode;
+    }
+    void pop(){
+        if(head == nullptr) return;
+        head = head->next;
+    }
+    int front(){
+        if(head == nullptr){
+            cout << "Empty List" << endl;
+            return -1;
+        }
+        return head->val;
+    }
+    bool isEmpty(){
+        if(head == nullptr) return true;
+        return false;
+    }
+    int size(){
+        if(head == nullptr) return 0;
+        int count = 0;
+        Node* temp = head;
+        while(temp != nullptr){
+            count++;
+            temp = temp->next;
+        }
+        return count;
+    }
+};
+
+int main() {
+    Queue q;
+    q.push(10);
+    q.push(20);
+    cout << q.front() << endl;
+    q.pop();
+    cout << q.front() << endl;
+    cout << q.isEmpty() << endl;
+    q.push(30);
+    cout << q.size() << endl;
+    return 0;
+}
